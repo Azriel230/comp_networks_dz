@@ -128,6 +128,8 @@ int __cdecl main(void)
         return 1;
     }
 
+
+    u_long mode = 1; // 1 - включить NonBlocking 
     while (true)
     {
         // Accept a client socket
@@ -138,6 +140,8 @@ int __cdecl main(void)
             WSACleanup();
             return 1;
         }
+
+        ioctlsocket(ClientSocket, FIONBIO, &mode); //Включить сокету режим NonBlocking
 
         clients.push_back(ClientSocket);
 
